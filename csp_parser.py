@@ -61,7 +61,7 @@ def get_csp_header(url):
         csp_header = r.headers['Content-Security-Policy']
         return csp_header
     elif 'content-security-policy-report-only' in r.headers:
-        csp_header = r.headers['content-security-policy-report-only:']
+        csp_header = r.headers['content-security-policy-report-only']
         return csp_header
     else:
         logger.info("[+] {} doesn't support CSP header".format(url))
