@@ -4,11 +4,10 @@ from socket import gethostbyname, gaierror
 from sys import version_info, exit
 
 import click
-import requests
+# import requests
 from requests import get, exceptions
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
-
-requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+# from requests.packages.urllib3.exceptions import InsecureRequestWarning
+# requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 if version_info[0] == 2:
     pass
@@ -57,7 +56,8 @@ def clean_domains(domains):
 def get_csp_header(url):
     try:
         # logger.info("[+] Fetching headers for {}".format(url))
-        r = get(url, verify=False)
+        # r = get(url, verify=False)
+        r = get(url)
     except exceptions.RequestException as e:
         print(e)
         exit(1)
@@ -135,14 +135,3 @@ def main(url, resolve, check_whois, output):
 
 if __name__ == '__main__':
     main()
-
-t = {'X-Amz-Cf-Pop': 'VIE50-C2', 'X-XSS-Protection': '1; mode=block', 'X-Cache': 'Hit from cloudfront',
-     'X-Content-Type-Options': 'nosniff', 'Content-Encoding': 'gzip', 'Transfer-Encoding': 'chunked', 'Age': '80244',
-     'Strict-Transport-Security': 'max-age=63072000', 'Vary': 'Accept-Encoding', 'Server': 'AmazonS3',
-     'Content-Security-Policy-Report-Only': "default-src 'self'; script-src 'report-sample' 'self' *.speedcurve.com 'sha256-q7cJjDqNO2e1L5UltvJ1LhvnYN7yJXgGO7b6h9xkL1o=' www.google-analytics.com/analytics.js 'sha256-JEt9Nmc3BP88wxuTZm9aKNu87vEgGmKW1zzy/vb1KPs=' polyfill.io/v3/polyfill.min.js assets.codepen.io production-assets.codepen.io; script-src-elem 'report-sample' 'self' *.speedcurve.com 'sha256-q7cJjDqNO2e1L5UltvJ1LhvnYN7yJXgGO7b6h9xkL1o=' www.google-analytics.com/analytics.js 'sha256-JEt9Nmc3BP88wxuTZm9aKNu87vEgGmKW1zzy/vb1KPs=' polyfill.io/v3/polyfill.min.js assets.codepen.io production-assets.codepen.io; style-src 'report-sample' 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; connect-src 'self' www.google-analytics.com stats.g.doubleclick.net; font-src 'self'; frame-src 'self' interactive-examples.mdn.mozilla.net mdn.github.io yari-demos.prod.mdn.mozit.cloud mdn.mozillademos.org yari-demos.stage.mdn.mozit.cloud jsfiddle.net www.youtube-nocookie.com codepen.io; img-src 'self' *.githubusercontent.com *.googleusercontent.com lux.speedcurve.com mdn.mozillademos.org media.prod.mdn.mozit.cloud media.stage.mdn.mozit.cloud interactive-examples.mdn.mozilla.net wikipedia.org www.google-analytics.com www.gstatic.com; manifest-src 'self'; media-src 'self' archive.org videos.cdn.mozilla.net; worker-src 'none'; report-uri https://sentry.prod.mozaws.net/api/73/security/?sentry_key=8664389dc16c4e9786e4a396f2964952;",
-     'Last-Modified': 'Thu, 10 Jun 2021 02:17:05 GMT', 'Connection': 'keep-alive',
-     'ETag': 'W/"589ce6d505934a796931a099bdf34668"',
-     'X-Amz-Cf-Id': '_PQNmUl9zX0EBxHzKZlYV5nMdbaihLfEG3iyfoOzMroTtx-DXWAicw==',
-     'Cache-Control': 'max-age=86400, public', 'Date': 'Sun, 13 Jun 2021 14:53:40 GMT', 'X-Frame-Options': 'DENY',
-     'Content-Type': 'text/html; charset=utf-8',
-     'Via': '1.1 e77ae8cfd42b65dd9027fa08596c6f2a.cloudfront.net (CloudFront)'}
